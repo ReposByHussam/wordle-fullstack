@@ -16,3 +16,8 @@ app.use(express.json());
 
 //koppla routes till appen
 app.use("/", pageRoutes);
+
+//startar severn
+app.listen(PORT, () => {
+    console.log(`Servern körs på http://localhost:${PORT}`);
+});
