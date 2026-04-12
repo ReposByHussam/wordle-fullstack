@@ -9,7 +9,7 @@ const pageController = require("../controllers/pageController");
 router.get("/", pageController.getHomePage);
 
 //informationssida
-router.get("about", pageController.getAboutPage);
+router.get("/about", pageController.getAboutPage);
 
 //highscore sida
 router.get("/highscores", pageController.getHighscoresPage);
