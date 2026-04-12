@@ -1,0 +1,24 @@
+{
+  "name": "wordle-fullstack",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/ReposByHussam/wordle-fullstack#readme",
+  "bugs": {
+    "url": "https://github.com/ReposByHussam/wordle-fullstack/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ReposByHussam/wordle-fullstack.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
