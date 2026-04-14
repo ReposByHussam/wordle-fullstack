@@ -35,7 +35,7 @@ function createGame(settings) {
         gameId,
         wordLength,
         allowDuplicateLetters,
-        status: "platying",
+        status: "playing",
     };
 }
 //hämtar ett spel från minnet med hjälp av gameId

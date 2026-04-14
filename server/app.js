@@ -14,6 +14,9 @@ const PORT = 5080;
 //Gör så att express kan läsa JSON data i request body
 app.use(express.json());
 
+//koppla API routes till appen
+app.use("/api", apiRoutes);
+
 //koppla routes till appen
 app.use("/", pageRoutes);
 
