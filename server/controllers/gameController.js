@@ -3,7 +3,9 @@ const gameService = require('../services/gameServices');
 //startar en ny spelomgång
 function startGame(req, res) {
     try{
-        const {wordLength, allowDuplicateLetters} = req.body;
+        console.log("req.headers content-type", req.headers["content-type"]);
+        console.log("req.body i startGame", req.body);
+        const {wordLength, allowDuplicateLetters} = req.body || {};
 
         //en enkel validering av input så att vi inte går med tom eller konstig data
         if(!wordLength || typeof allowDuplicateLetters !== "boolean"){
@@ -27,7 +29,7 @@ function startGame(req, res) {
 function submitGuess(req, res) {
     try{
         const {gameId} = req.params;
-        const {guess} = req.body;
+        const {guess} = req.body || {};
 
         //simpel kontroll av att en gissning faktiskt har skickts in
         if(!guess){
@@ -46,12 +48,12 @@ function submitGuess(req, res) {
 
         //tillfälligt test-svar
         return res.status(200).json({
-            message: "Spelet hittade och gissningen togs emot",
+            message: "Spelet hittades och gissningen togs emot",
             gameId: game.gameId,
                 guess,
                 wordLength: game.settings.wordLength,
                 guessCount: game.guesses.length,
-                ifFinished: game.isFinished,
+                isFinished: game.isFinished,
             });
         }catch(error){
             console.error("Fel när gissning skulle hanteras", error);
