@@ -23,9 +23,43 @@ function startGame(req, res) {
 
     }
 }
-
+//tar emot en gissning och försöker hitta rätt spel
 function submitGuess(req, res) {
-    res.json({message: "API för att skicka en gissning fungerar.",});
+    try{
+        const {gameId} = req.params;
+        const {guess} = req.body;
+
+        //simpel kontroll av att en gissning faktiskt har skickts in
+        if(!guess){
+            return res.status(400).json({
+                message: "Ingen gissning skickades in",
+            });
+        }
+        const game = gameService.getGameById(gameId);
+
+        //om spelet inte hittas så skickas ett 404 svar
+        if(!game){
+            return res.status(404).json({
+                message: "Spelet hittades inte",
+            });
+        }
+
+        //tillfälligt test-svar
+        return res.status(200).json({
+            message: "Spelet hittade och gissningen togs emot",
+            gameId: game.gameId,
+                guess,
+                wordLength: game.settings.wordLength,
+                guessCount: game.guesses.length,
+                ifFinished: game.isFinished,
+            });
+        }catch(error){
+            console.error("Fel när gissning skulle hanteras", error);
+
+            return res.status(500).json({
+                message: "Ett fel inträffade när gissningen skulle hanteras",
+            });
+        }
 }
 
 module.exports = {
