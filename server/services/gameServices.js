@@ -1,3 +1,5 @@
+const feedBackService = require("./feedbackService");
+
 //tillfällig lagring i minnet för pågående spel.
 //Nyckeln blir gameId och värdet blir själva spelobjektet
 const games = new Map();
@@ -50,7 +52,8 @@ function addGuessToGame(gameId, guess) {
     if(!game){
         return null;
     }
-
+    const feedback = feedBackService.getFeedBack(guess, game.secretWord);
+    
     game.guesses.push({
         guess,
     });
