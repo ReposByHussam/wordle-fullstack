@@ -37,23 +37,23 @@ function submitGuess(req, res) {
                 message: "Ingen gissning skickades in",
             });
         }
-        const game = gameService.getGameById(gameId);
+        const updatedGame = gameService.addGuessToGame(gameId, guess);
 
         //om spelet inte hittas så skickas ett 404 svar
-        if(!game){
+        if(!updatedGame){
             return res.status(404).json({
                 message: "Spelet hittades inte",
             });
         }
 
-        //tillfälligt test-svar
         return res.status(200).json({
-            message: "Spelet hittades och gissningen togs emot",
-            gameId: game.gameId,
+            message: "Gissningen sparades i spelet",
+            gameId: updatedGame.gameId,
                 guess,
-                wordLength: game.settings.wordLength,
-                guessCount: game.guesses.length,
-                isFinished: game.isFinished,
+                wordLength: updatedGame.settings.wordLength,
+                guessCount: updatedGame.guesses.length,
+                isFinished: updatedGame.isFinished,
+                guesses: updatedGame.guesses,
             });
         }catch(error){
             console.error("Fel när gissning skulle hanteras", error);
