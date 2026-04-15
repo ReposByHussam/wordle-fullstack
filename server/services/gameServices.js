@@ -43,8 +43,22 @@ function getGameById(gameId) {
     return games.get(gameId);
 }
 
+//lägger till en gissning i ett spel som redan finns i minnet
+function addGuessToGame(gameId, guess) {
+    const game = games.get(gameId);
+
+    if(!game){
+        return null;
+    }
+
+    game.guesses.push({
+        guess,
+    });
+    return game;
+}
 //exporterar funktionerna så att de kan användas i controllers
 module.exports = {
     createGame,
     getGameById,
+    addGuessToGame,
 };
