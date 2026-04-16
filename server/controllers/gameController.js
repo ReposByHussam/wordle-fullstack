@@ -37,23 +37,37 @@ function submitGuess(req, res) {
                 message: "Ingen gissning skickades in",
             });
         }
-        const updatedGame = gameService.addGuessToGame(gameId, guess);
+        const result = gameService.addGuessToGame(gameId, guess);
 
         //om spelet inte hittas så skickas ett 404 svar
-        if(!updatedGame){
+        if(result.error === "NOT_FOUND"){
             return res.status(404).json({
                 message: "Spelet hittades inte",
             });
         }
+        if(result.error === "GAME_ALREADY_FINISHED"){
+            return res.status(400).json({
+                message: "Spelet är redan avslutat",
+            });
+        }
+        if(result.error === "INVALID_GUESS_LENGTH"){
+            return res.status(400).json({
+                message: `Gissningen måste vara ${result.expectedLength} bokstäver lång`,
+            });
+        }
+        const {game, isWinningGuess } = result;
 
         return res.status(200).json({
-            message: "Gissningen sparades i spelet",
-            gameId: updatedGame.gameId,
+            message: isWinningGuess
+                ? "Grattis! Du gissade rätt ord! Spelet är nu avslutat."
+                : "Din gissning sparades i spelet.",
+            gameId: game.gameId,
                 guess,
-                wordLength: updatedGame.settings.wordLength,
-                guessCount: updatedGame.guesses.length,
-                isFinished: updatedGame.isFinished,
-                guesses: updatedGame.guesses,
+                wordLength: game.settings.wordLength,
+                guessCount: game.guesses.length,
+                isFinished: game.isFinished,
+                isWinningGuess,
+                guesses: game.guesses,
             });
         }catch(error){
             console.error("Fel när gissning skulle hanteras", error);

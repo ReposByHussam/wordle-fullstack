@@ -50,14 +50,40 @@ function addGuessToGame(gameId, guess) {
     const game = games.get(gameId);
 
     if(!game){
-        return null;
+        return {
+            error: "NOT_FOUND",
+        };
+    }
+    if (game.isFinished){
+        return {
+            error: "GAME_ALREADY_FINISHED",
+        };
+    }
+
+    //gör om wordLength till en siffra om den råkat komma in som sträng
+    const expectedLength = Number(game.settings.wordLength);
+
+    if(guess.length !== expectedLength){
+        return {
+            error: "INVALID_GUESS_LENGTH",
+            expectedLength,
+        };
     }
     const feedback = feedBackService.getFeedBack(guess, game.secretWord);
-    
+
     game.guesses.push({
         guess,
+        feedback
     });
-    return game;
+    const isWinningGuess = feedback.every((status)=> status === "correct");
+    
+    if(isWinningGuess){
+        game.isFinished = true;
+    }
+    return {
+        game,
+        isWinningGuess,
+    };
 }
 //exporterar funktionerna så att de kan användas i controllers
 module.exports = {
