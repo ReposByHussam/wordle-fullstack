@@ -26,6 +26,7 @@ function createGame(settings) {
             allowDuplicateLetters,
         },
         startedAt: Date.now(),
+        finishedAt: null,
         guesses: [],
         isFinished: false,
     };
@@ -79,6 +80,7 @@ function addGuessToGame(gameId, guess) {
     
     if(isWinningGuess){
         game.isFinished = true;
+        game.finishedAt = Date.now();
     }
     return {
         game,
