@@ -6,7 +6,7 @@ function GuessRow({ guess, feedback }) {
                 const status = feedback[index];
                 return (
                     <span key={`${letter}-${index}`}
-                    className={`letter box ${status}`}
+                    className={`letter-box ${status}`}
                     >
                         {letter.toUpperCase()}
                     </span>
