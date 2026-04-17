@@ -1,3 +1,6 @@
+//använda cors
+const cors = require("cors");
+
 //importera express biblioteket så att servern kan skapas
 const express = require("express");
 
@@ -10,6 +13,11 @@ const app = express();
 
 //tilldelda porten som servern kommer att lyssna på
 const PORT = 5080;
+
+app.use(cors({
+    origin: "http://localhost:5173",
+})
+);
 
 //Gör så att express kan läsa JSON data i request body
 app.use(express.json());
