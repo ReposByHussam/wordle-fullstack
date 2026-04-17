@@ -36,8 +36,9 @@ function GameSettings({onStartGame, disabled}) {
                 />
             </div>
             
-                <button type="submit" disabled={disabled}>Starta nytt spel</button>
-
+                <button type="submit" disabled={disabled}>
+                    Starta spel
+                    </button>
         </form>
     );
 }
