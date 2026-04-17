@@ -1,9 +1,13 @@
+//MongoDB anslutningssträng från .env filen
+require("dotenv").config();
+
 //använda cors
 const cors = require("cors");
 
 //importera express biblioteket så att servern kan skapas
 const express = require("express");
 
+const connectToDatabase = require("./config/db");
 //importera route filer
 const pageRoutes = require("./routes/pageRoutes");
 const apiRoutes = require("./routes/apiRoutes");
@@ -28,7 +32,12 @@ app.use("/api", apiRoutes);
 //koppla routes till appen
 app.use("/", pageRoutes);
 
-//startar severn
+async function startServer() {
+    await connectToDatabase();
+
+    //startar severn
 app.listen(PORT, () => {
     console.log(`Servern körs på http://localhost:${PORT}`);
 });
+}
+startServer();
