@@ -33,3 +33,19 @@ export async function submitGuess(gameId, guess) {
     
     return data; 
 }
+export async function saveHighscore(name, gameId){
+    const response = await fetch(`http://localhost:5080/api/highscores`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, gameId }),
+    });
+
+    const data = await response.json();
+    
+    if (!response.ok) {
+        throw new Error(data.message || "Ett fel inträffade när highscore skulle sparas");
+    }
+    return data;
+}

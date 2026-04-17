@@ -2,7 +2,8 @@ import {useState} from "react";
 import GameSettings  from "../components/GameSettings";
 import GuessForm from "../components/GuessForm";
 import GuessList from "../components/GuessList";
-import { startGame, submitGuess } from "../services/api";
+import SaveScoreForm from "../components/SaveScoreForm";
+import { saveHighscore, startGame, submitGuess } from "../services/api";
 
 function GamePage() {
     const [gameId, setGameId] = useState(null);
@@ -10,11 +11,17 @@ function GamePage() {
     const [guesses, setGuesses] = useState([]);
     const [gameStatus, setGameStatus] = useState("idle");
     const [errorMessage, setErrorMessage] = useState("");
+    const [scoreSaved, setScoreSaved] = useState(false);
+    const [savedHighscore, setSavedHighscore] = useState(null);
+
     
     async function handleStartGame(newSettings) {
         try {
             setErrorMessage("");
             setGameStatus("starting");
+            setGuesses([]);
+            setScoreSaved(false);
+            setSavedHighscore(null);
 
             const createdGame = await startGame(newSettings);
 
@@ -39,7 +46,7 @@ function GamePage() {
             setGuesses(result.guesses);
 
             if(result.isFinished) {
-                setGameStatus("Won");
+                setGameStatus("won");
             }else {
                 setGameStatus("playing");
             }
@@ -49,12 +56,29 @@ function GamePage() {
                 setGameStatus("error");
             }
         }
+       
+        async function handleSaveScore(name) {
+            try {
+                setErrorMessage("");
+                setGameStatus("savingScore");
+
+                const result = await saveHighscore(name, gameId);
+
+                setSavedHighscore(result.highscore);
+                setScoreSaved(true);
+                setGameStatus("scoreSaved");
+            } catch (error) {
+                setErrorMessage(error.message);
+                setGameStatus("error");
+            }
+            
+        }
     
     return (
         <div>
             <h1>Wordle</h1>
             <GameSettings onStartGame={handleStartGame} 
-            disabled={gameStatus === "starting"} />
+            disabled={gameStatus === "starting" || gameStatus === "savingScore"} />
             <p>Status: {gameStatus}</p>
             {errorMessage && <p> Fel: {errorMessage}</p>}
             {gameId && <p>Game ID: {gameId}</p>}
@@ -69,12 +93,29 @@ function GamePage() {
                 <>
                 <GuessForm
                     onSubmitGuess={handleSubmitGuess}
-                    disabled = {gameStatus === "staring" || gameStatus === "won"}
+                    disabled = {gameStatus === "starting" ||
+                                gameStatus === "won" ||
+                                gameStatus === "savingScore" ||
+                                gameStatus === "scoreSaved"}
                     wordLength={settings.wordLength}
                 />
                 <GuessList guesses={guesses} />
                 </>
                 )}
+                {gameStatus === "won" && !scoreSaved && (
+                    <SaveScoreForm
+                    onSaveScore={handleSaveScore}
+                    disabled={gameStatus === "savingScore"}
+                    />
+                )}
+                {scoreSaved && savedHighscore && (
+                    <div>
+                        <h2>Highscore Sparad!</h2>
+                        <p>Namn: {savedHighscore.name}</p>
+                        <p>Antal gissningar: {savedHighscore.guessCount}</p>
+                        <p>Tid (ms): {savedHighscore.durationMs}</p>
+                        </div>
+                        )}
         </div>
     );
 }
