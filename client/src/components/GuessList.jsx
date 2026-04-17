@@ -6,15 +6,19 @@ function GuessList({ guesses }) {
     }
     
     return (
-        <ul>
-            {guesses.map((entry, index) =>(
-                <GuessRow
-                key={`${entry.guess}-${index}`}
-                guess={entry.guess}
-                feedback={entry.feedback}
-                />
-            ))}
-        </ul>
+        <div>
+            <h2> Tidigare Gissningar</h2>
+            <ul className="guess-list">
+                {guesses.map((entry, index) =>(
+                    <GuessRow 
+                    key = {`${entry.guess} -${-index}`} 
+                    guess={entry.guess}
+                    feedback={entry.feedback}
+                    />
+                ))}
+                </ul>
+        </div>
+     
     );
 }
 export default GuessList;
