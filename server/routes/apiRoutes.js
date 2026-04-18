@@ -15,6 +15,9 @@ router.post("/games/:gameId/guesses", gameController.submitGuess);
 //Spara highscore
 router.post("/highscores", higheScoreController.saveHighscore);
 
+//Hämta highscores
+router.get("/highscores", higheScoreController.getHighscores);
+
 //exportera router så att den kan användas i app.js
 module.exports = router;
 
