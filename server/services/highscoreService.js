@@ -37,6 +37,19 @@ async function saveHighScoreFromGame(gameId, name){
         highScore: savedHighscore,
     };
 }
+
+//Hämtar alla highscores från databasen sorterade på snabbaste tid
+async function getHighscores(){
+    const highScores = await Highscore.find({})
+    .sort({
+        durationMs: 1,
+        guessCount: 1,
+            createdAt: 1,
+    })
+        .lean();
+        return highScores;
+    }
 module.exports = {
     saveHighScoreFromGame,
+    getHighscores,
 };
