@@ -9,7 +9,16 @@ function getAboutPage(req, res) {
 }
 
 function getHighscoresPage(req, res) {
-    res.send("Highscore-sidan för Wordle kommer här.");
+    try{
+        const highscores = await highscoreService.getHighscores();
+
+        res.render("highscores", {
+            highscores,
+        });
+    }catch(error){
+        console.error("Fel när highscores skulle hämtas", error);
+        res.status(500).send("Ett fel inträffade när highscores sidan skulle hämtas");
+    }
 }
 
 module.exports = {
