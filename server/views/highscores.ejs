@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highscpres</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 2rem;
+        background: #f4f4f4;
+        color: #222;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+        background: white;
+    }
+    th, td {
+        padding: 0.75rem;
+        text-align: left;
+        border: 1px solid #ccc;
+    }
+    th {
+        background: #eee;
+    }
+    .empty-message{
+        padding: 1rem;
+        background: white;
+        border: 1px solid #ccc;
+    }
+</style>
+</head>
+<body>
+    <h1>Highscore lista</h1>
+    <% if(highscores.length === 0){ %>
+        <p class="empty-message">Inga highscores än, spela ett spel för att få en plats på listan!</p>
+    <% } else { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Placering</th>
+                    <th>Namn</th>
+                    <th>Tid (ms)</th>
+                    <th>Antal gissningar</th>
+                    <th>Ordlängd</th>
+                    <th>Dubletter</th>
+                    <th>Skapad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% highscores.forEach((score, index) => { %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= score.name %></td>
+                        <td><%= score.durationMs %></td>
+                        <td><%= score.guessCount %></td>
+                        <td><%= score.wordLength %></td>
+                        <td><%= score.allowDuplicateLetters ? "Ja" : "Nej" %></td>
+                        <td><%= new Date(score.createdAt).toLocaleString("sv-SE") %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+</body>
+</html>
