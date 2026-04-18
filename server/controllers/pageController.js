@@ -1,4 +1,5 @@
 //controller för vanliga sidor
+const highscoreService = require("../services/highscoreService");
 
 function getHomePage(req, res) {
     res.send("Startsidan för Wordle kommer här.");
