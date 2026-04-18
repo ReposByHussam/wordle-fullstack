@@ -8,7 +8,7 @@ function getAboutPage(req, res) {
     res.send("Om-sidan för Wordle kommer här.");
 }
 
-function getHighscoresPage(req, res) {
+async function getHighscoresPage(req, res) {
     try{
         const highscores = await highscoreService.getHighscores();
 
