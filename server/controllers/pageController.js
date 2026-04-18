@@ -6,7 +6,7 @@ function getHomePage(req, res) {
 }
 
 function getAboutPage(req, res) {
-    res.send("Om-sidan för Wordle kommer här.");
+    res.render("about");
 }
 
 async function getHighscoresPage(req, res) {
