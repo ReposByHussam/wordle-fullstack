@@ -38,5 +38,5 @@ async function saveHighScoreFromGame(gameId, name){
     };
 }
 module.exports = {
-    buildHighScoreFromGame,
+    saveHighScoreFromGame,
 };
