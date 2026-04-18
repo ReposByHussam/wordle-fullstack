@@ -34,6 +34,21 @@ async function saveHighscore(req, res){
         });
     }
 }
+async function getHighscores(req, res){
+    try{
+        const highscores = await highscoreService.getHighscores();
+        
+        return res.status(200).json({
+            highscores,
+        });
+    }catch(error){
+        console.error("Fel när highscores skulle hämtas", error);
+        
+        return res.status(500).json({message: "Ett fel inträffade när highscores skulle hämtas",
+        });
+    }
+}
 module.exports = {
     saveHighscore,
+    getHighscores,
 };
