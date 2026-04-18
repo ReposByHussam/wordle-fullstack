@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Om projektet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background: #f4f4f4;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    nav {
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #005bbb;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      background: white;
+      padding: 1.5rem;
+      border: 1px solid #ccc;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="http://localhost:5173">Spela</a>
+    <a href="/about">Om projektet</a>
+    <a href="/highscores">Highscores</a>
+  </nav>
+
+  <main>
+    <h1>Om projektet</h1>
+    <p>
+      Det här projektet är ett Wordle-inspirerat fullstack-spel byggt med React i frontend
+      och Node/Express i backend.
+    </p>
+    <p>
+      Spelet använder ett API för att starta spel, ta emot gissningar och räkna ut feedback.
+      Highscores sparas beständigt i MongoDB.
+    </p>
+    <p>
+      Highscore-sidan renderas server-side med EJS.
+    </p>
+  </main>
+</body>
+</html>
