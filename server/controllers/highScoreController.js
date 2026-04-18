@@ -1,11 +1,11 @@
 const highscoreService = require("../services/highscoreService");
 
 //controller för highscores via API
-function saveHighscore(req, res){ 
+async function saveHighscore(req, res){ 
     try{ 
         const {name, gameId} = req.body || {};
         
-        const result = highscoreService.buildHighScoreFromGame(gameId, name);
+        const result = await highscoreService.saveHighscoreFromGame(gameId, name);
 
         if(result.error === "GAME_NOT_FOUND"){
             return res.status(404).json({
@@ -24,7 +24,7 @@ function saveHighscore(req, res){
         }
         return res.status(201).json({
             message: "Highscore skapad",
-            highScore: result.highScoreData,
+            highscore: result.highscore,
         });
     }catch(error){
         console.error("Fel när highscore skulle sparas", error);
