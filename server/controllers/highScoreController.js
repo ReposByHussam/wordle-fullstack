@@ -5,7 +5,7 @@ async function saveHighscore(req, res){
     try{ 
         const {name, gameId} = req.body || {};
         
-        const result = await highscoreService.saveHighscoreFromGame(gameId, name);
+        const result = await highscoreService.saveHighScoreFromGame(gameId, name);
 
         if(result.error === "GAME_NOT_FOUND"){
             return res.status(404).json({

@@ -31,7 +31,7 @@ async function saveHighScoreFromGame(gameId, name){
         allowDuplicateLetters: game.settings.allowDuplicateLetters,
     };
 
-    const highscoreDoument = new Highscore(highScoreData);
+    const highscoreDocument = new Highscore(highScoreData);
     const savedHighscore = await highscoreDocument.save();
     return {
         highScore: savedHighscore,
