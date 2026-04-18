@@ -23,6 +23,14 @@ app.use(cors({
 })
 );
 
+
+//skapa en säkrare path
+const path = require("path");
+
+//Gör så att express kan läsa EJS med säkrare path
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "./views"));
+
 //Gör så att express kan läsa JSON data i request body
 app.use(express.json());
 
