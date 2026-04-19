@@ -46,7 +46,7 @@ function GamePage() {
             setGuesses(result.guesses);
 
             if(result.isFinished) {
-                setGameStatus("won");
+                setGameStatus("Vunnit");
             }else {
                 setGameStatus("playing");
             }
@@ -66,7 +66,7 @@ function GamePage() {
 
                 setSavedHighscore(result.highscore);
                 setScoreSaved(true);
-                setGameStatus("scoreSaved");
+                setGameStatus("Highscore sparad");
             } catch (error) {
                 setErrorMessage(error.message);
                 setGameStatus("error");
@@ -77,6 +77,12 @@ function GamePage() {
         return (
             <div className="page-wrapper">
               <div className="game-card">
+                <nav className="top-nav">
+                  <a href="http://localhost:5173">Spela</a>
+                  <a href="http://localhost:5080/about">Om projektet</a>
+                  <a href="http://localhost:5080/highscores">Highscores</a>
+                </nav>
+          
                 <header className="page-header">
                   <h1>Wordle Fullstack</h1>
                   <p className="subtitle">
@@ -94,7 +100,9 @@ function GamePage() {
           
                 <section className="panel">
                   <h2>Status</h2>
-                  <p className="status-badge">Status: {gameStatus}</p>
+                  <p className={`status-badge status-${gameStatus.toLowerCase()}`}>
+                    Status: {gameStatus}
+                  </p>
           
                   {errorMessage && <p className="error-message">Fel: {errorMessage}</p>}
           

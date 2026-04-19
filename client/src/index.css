@@ -13,10 +13,6 @@ body {
   background: linear-gradient(to bottom, #f9fafb, #e5e7eb);
   min-height: 100vh;
 }
-p{
-  line-height: 1.5;
-  margin: .5rem 0;
-}
 
 #root {
   min-height: 100vh;
@@ -32,11 +28,30 @@ p{
 
 .game-card {
   width: 100%;
-  max-width: 800px;
+  max-width: 850px;
   background: white;
   border-radius: 1rem;
   padding: 2rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.top-nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.top-nav a {
+  text-decoration: none;
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.top-nav a:hover {
+  text-decoration: underline;
 }
 
 .page-header {
@@ -51,6 +66,7 @@ p{
 .subtitle {
   margin: 0;
   color: #6b7280;
+  line-height: 1.6;
 }
 
 .panel {
@@ -70,7 +86,6 @@ p{
 .success-panel {
   background: #ecfdf5;
   border-color: #a7f3d0;
-  color: black;
 }
 
 form {
@@ -96,13 +111,19 @@ input[type="number"] {
   border-radius: 0.6rem;
   font-size: 1rem;
   background: white;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 input[type="checkbox"] {
   transform: scale(1.2);
   margin-top: 0.4rem;
-  align-items: left;
-
 }
 
 button {
@@ -114,10 +135,15 @@ button {
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 
 button:hover:not(:disabled) {
   background: #1d4ed8;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 button:disabled {
@@ -129,10 +155,31 @@ button:disabled {
   display: inline-block;
   padding: 0.5rem 0.85rem;
   border-radius: 999px;
-  background: #e0e7ff;
-  color: #3730a3;
   font-weight: 700;
   margin-bottom: 0.75rem;
+}
+
+.status-idle,
+.status-playing {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.status-starting,
+.status-savingscore {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-won,
+.status-scoresaved {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-error {
+  background: #fee2e2;
+  color: #991b1b;
 }
 
 .error-message {
@@ -182,15 +229,15 @@ button:disabled {
 }
 
 .letter-box.misplaced {
-  background: #efd768;
-  color: rgb(255, 255, 255);
-  border-color: #efd768;
+  background: #f0d250;
+  color: white;
+  border-color: #f0d250;
 }
 
 .letter-box.incorrect {
-  background: #fa1616;
+  background: #e44242;
   color: white;
-  border-color: #fa1616;
+  border-color: #e44242;
 }
 
 @media (max-width: 640px) {
