@@ -25,6 +25,7 @@ function guessForm ({onSubmitGuess, disabled, wordLength}) {
                     onChange={(event) => setGuessInput(event.target.value)}
                     disabled={disabled}
                     maxLength={wordLength || undefined}
+                    placeholder = {`Gissa ett ord med ${wordLength} bokstäver`}
                 />
 
             </div>
