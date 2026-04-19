@@ -23,6 +23,7 @@ function SaveScoreForm({ onSaveScore, disabled }) {
                     value={nameInput}
                     onChange={(event) => setNameInput(event.target.value)}
                     disabled={disabled}
+                    placeholder="Ange ditt namn"
                 />
             </div>
             <button type="submit" disabled={disabled}>
