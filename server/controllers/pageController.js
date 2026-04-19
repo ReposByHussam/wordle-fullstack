@@ -2,8 +2,8 @@
 const highscoreService = require("../services/highscoreService");
 
 function getHomePage(req, res) {
-    res.send("Startsidan för Wordle kommer här.");
-}
+    res.send('Gå till spelet via <a href="http://localhost:5173">Spela Wordle</a>');
+  }
 
 function getAboutPage(req, res) {
     res.render("about");

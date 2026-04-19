@@ -12,7 +12,7 @@ const highscoreSchema = new mongoose.Schema({
     },
     guesses: {
         type: [String],
-        equired: true,
+        required: true,
     },
     guessCount: {
         type: Number,

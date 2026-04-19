@@ -22,7 +22,7 @@ async function saveHighScoreFromGame(gameId, name){
     }
     const durationMs = game.finishedAt - game.startedAt;
     
-    highScoreData = {
+   const highScoreData = {
         name: name.trim(),
         durationMs,
         guesses: game.guesses.map((entry) => entry.guess),

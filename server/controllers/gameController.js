@@ -3,8 +3,7 @@ const gameService = require('../services/gameServices');
 //startar en ny spelomgång
 function startGame(req, res) {
     try{
-        console.log("req.headers content-type", req.headers["content-type"]);
-        console.log("req.body i startGame", req.body);
+      
         const {wordLength, allowDuplicateLetters} = req.body || {};
 
         //en enkel validering av input så att vi inte går med tom eller konstig data
