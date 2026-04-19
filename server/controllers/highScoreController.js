@@ -24,7 +24,7 @@ async function saveHighscore(req, res){
         }
         return res.status(201).json({
             message: "Highscore skapad",
-            highscore: result.highscore,
+            highscore: result.highScore,
         });
     }catch(error){
         console.error("Fel när highscore skulle sparas", error);

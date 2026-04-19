@@ -254,3 +254,11 @@ button:disabled {
     height: 2.6rem;
   }
 }
+.secondary-button {
+  margin-top: 1rem;
+  background: #6b7280;
+}
+
+.secondary-button:hover:not(:disabled) {
+  background: #2563eb;
+}
