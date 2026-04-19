@@ -70,6 +70,7 @@ p{
 .success-panel {
   background: #ecfdf5;
   border-color: #a7f3d0;
+  color: black;
 }
 
 form {

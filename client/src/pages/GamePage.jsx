@@ -30,7 +30,7 @@ function GamePage() {
                 wordLength: createdGame.wordLength,
                 allowDuplicateLetters: createdGame.allowDuplicateLetters,
             });
-            setGameStatus("playing");
+            setGameStatus("Spel pågår");
         } catch (error) {
             setErrorMessage(error.message);
             setGameStatus("error");

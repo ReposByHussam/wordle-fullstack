@@ -1,65 +1,139 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Om projektet</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      margin: 2rem;
-      background: #f4f4f4;
-      color: #222;
-      line-height: 1.6;
+      background: linear-gradient(to bottom, #f9fafb, #e5e7eb);
+      color: #1f2937;
+      min-height: 100vh;
+    }
+
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem 1rem;
+    }
+
+    .page-card {
+      width: 100%;
+      max-width: 900px;
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     }
 
     nav {
-      margin-bottom: 2rem;
       display: flex;
       gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e5e7eb;
     }
 
     nav a {
       text-decoration: none;
-      color: #005bbb;
-      font-weight: bold;
+      color: #2563eb;
+      font-weight: 700;
     }
 
     nav a:hover {
       text-decoration: underline;
     }
 
-    main {
-      background: white;
-      padding: 1.5rem;
-      border: 1px solid #ccc;
-    }
-
     h1 {
       margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      margin-top: 0;
+      margin-bottom: 2rem;
+      color: #6b7280;
+    }
+
+    .content-section {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.8rem;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section h2 {
+      margin-top: 0;
+      font-size: 1.15rem;
+    }
+
+    .content-section p {
+      margin-bottom: 0;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 640px) {
+      .page-card {
+        padding: 1.25rem;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
     }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="http://localhost:5173">Spela</a>
-    <a href="/about">Om projektet</a>
-    <a href="/highscores">Highscores</a>
-  </nav>
+  <div class="page-wrapper">
+    <div class="page-card">
+      <nav>
+        <a href="http://localhost:5173">Spela</a>
+        <a href="/about">Om projektet</a>
+        <a href="/highscores">Highscores</a>
+      </nav>
 
-  <main>
-    <h1>Om projektet</h1>
-    <p>
-      Det här projektet är ett Wordle-inspirerat fullstack-spel byggt med React i frontend
-      och Node/Express i backend.
-    </p>
-    <p>
-      Spelet använder ett API för att starta spel, ta emot gissningar och räkna ut feedback.
-      Highscores sparas beständigt i MongoDB.
-    </p>
-    <p>
-      Highscore-sidan renderas server-side med EJS.
-    </p>
-  </main>
+      <header>
+        <h1>Om projektet</h1>
+        <p class="subtitle">
+          Ett Wordle-inspirerat fullstack-projekt med React, Express, EJS och MongoDB.
+        </p>
+      </header>
+
+      <section class="content-section">
+        <h2>Vad projektet gör</h2>
+        <p>
+          Användaren kan starta ett nytt spel, skicka gissningar, få feedback för varje bokstav
+          och spara sitt resultat i en highscore-lista när spelet är vunnet.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>Frontend och backend</h2>
+        <p>
+          Spelet spelas i frontend med React. Backend byggs med Node och Express och ansvarar
+          för spellogik, API-routes, highscorehantering och server-side rendering av vissa sidor.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>Databas</h2>
+        <p>
+          Highscores lagras beständigt i MongoDB via Mongoose, vilket gör att resultaten finns kvar
+          även om servern startas om.
+        </p>
+      </section>
+    </div>
+  </div>
 </body>
 </html>

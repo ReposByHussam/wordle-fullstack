@@ -1,79 +1,187 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Highscpres</title>
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Highscores</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-        font-family: Arial, sans-serif;
-        margin: 2rem;
-        background: #f4f4f4;
-        color: #222;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #f9fafb, #e5e7eb);
+      color: #1f2937;
+      min-height: 100vh;
     }
+
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem 1rem;
+    }
+
+    .page-card {
+      width: 100%;
+      max-width: 1000px;
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #2563eb;
+      font-weight: 700;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
     h1 {
-        text-align: center;
-        margin-bottom: 1rem;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
     }
+
+    .subtitle {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      color: #6b7280;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.8rem;
+      background: #fff;
+    }
+
     table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-        background: white;
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
     }
-    th, td {
-        padding: 0.75rem;
-        text-align: left;
-        border: 1px solid #ccc;
+
+    th,
+    td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
     }
+
     th {
-        background: #eee;
+      background: #f9fafb;
+      font-size: 0.95rem;
     }
-    .empty-message{
-        padding: 1rem;
-        background: white;
-        border: 1px solid #ccc;
+
+    tbody tr:hover {
+      background: #f9fafb;
     }
-</style>
+
+    .rank-cell {
+      font-weight: 700;
+      color: #2563eb;
+    }
+
+    .empty-message {
+      padding: 1rem 1.25rem;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.8rem;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      background: #e0e7ff;
+      color: #3730a3;
+    }
+
+    @media (max-width: 640px) {
+      .page-card {
+        padding: 1.25rem;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <a href="http://localhost:5173">Till Spelet</a>
-        <a href="/about"> Om projektet</a>
+  <div class="page-wrapper">
+    <div class="page-card">
+      <nav>
+        <a href="http://localhost:5173">Spela</a>
+        <a href="/about">Om projektet</a>
         <a href="/highscores">Highscores</a>
-    </nav>
-    <h1>Highscore lista</h1>
-    <% if (!highscores || highscores.length === 0) { %>
-        <p class="empty-message">
-            Inga highscores än, spela ett spel för att få en plats på listan!
+      </nav>
+
+      <header>
+        <h1>Highscore-lista</h1>
+        <p class="subtitle">
+          Här visas de sparade resultaten från databasen, sorterade med bästa resultat först.
         </p>
-    <% } else { %>
-        <table>
+      </header>
+
+      <% if (!highscores || highscores.length === 0) { %>
+        <p class="empty-message">
+          Inga highscores än, spela ett spel för att få en plats på listan!
+        </p>
+      <% } else { %>
+        <div class="table-wrapper">
+          <table>
             <thead>
-                <tr>
-                    <th>Placering</th>
-                    <th>Namn</th>
-                    <th>Tid (ms)</th>
-                    <th>Antal gissningar</th>
-                    <th>Ordlängd</th>
-                    <th>Dubletter</th>
-                    <th>Skapad</th>
-                </tr>
+              <tr>
+                <th>Placering</th>
+                <th>Namn</th>
+                <th>Tid (ms)</th>
+                <th>Antal gissningar</th>
+                <th>Ordlängd</th>
+                <th>Dubletter</th>
+                <th>Skapad</th>
+              </tr>
             </thead>
             <tbody>
-                <% highscores.forEach((score, index) => { %>
-                    <tr>
-                        <td><%= index + 1 %></td>
-                        <td><%= score.name %></td>
-                        <td><%= score.durationMs %></td>
-                        <td><%= score.guessCount %></td>
-                        <td><%= score.wordLength %></td>
-                        <td><%= score.allowDuplicateLetters ? "Ja" : "Nej" %></td>
-                        <td><%= new Date(score.createdAt).toLocaleString("sv-SE") %></td>
-                    </tr>
-                <% }) %>
+              <% highscores.forEach((score, index) => { %>
+                <tr>
+                  <td class="rank-cell"><%= index + 1 %></td>
+                  <td><%= score.name %></td>
+                  <td><%= score.durationMs %></td>
+                  <td><%= score.guessCount %></td>
+                  <td><%= score.wordLength %></td>
+                  <td>
+                    <span class="pill">
+                      <%= score.allowDuplicateLetters ? "Ja" : "Nej" %>
+                    </span>
+                  </td>
+                  <td><%= new Date(score.createdAt).toLocaleString("sv-SE") %></td>
+                </tr>
+              <% }) %>
             </tbody>
-        </table>
-        <% } %>
+          </table>
+        </div>
+      <% } %>
+    </div>
+  </div>
 </body>
 </html>
