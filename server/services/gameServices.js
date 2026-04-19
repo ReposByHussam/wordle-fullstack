@@ -1,5 +1,7 @@
 const feedBackService = require("./feedbackService");
 
+const wordService = require("./wordService");
+
 //tillfällig lagring i minnet för pågående spel.
 //Nyckeln blir gameId och värdet blir själva spelobjektet
 const games = new Map();
@@ -13,8 +15,9 @@ function createGameId() {
 function createGame(settings) {
     const {wordLength, allowDuplicateLetters} = settings;
 
-    //tillfälligt testord
-    const secretWord = "apple";
+    //random ord genereras utifrån de valda inställningarna
+    const secretWord = wordService.getRandomWord({
+        wordLength, allowDuplicateLetters});
 
     const gameId = createGameId();
 
