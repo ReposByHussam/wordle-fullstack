@@ -74,49 +74,84 @@ function GamePage() {
             
         }
     
-    return (
-        <div>
-            <h1>Wordle</h1>
-            <GameSettings onStartGame={handleStartGame} 
-            disabled={gameStatus === "starting" || gameStatus === "savingScore"} />
-            <p>Status: {gameStatus}</p>
-            {errorMessage && <p> Fel: {errorMessage}</p>}
-            {gameId && <p>Game ID: {gameId}</p>}
-
-            {settings && (
-                <div>
-                    <p>Ordlängd: {settings.wordLength}</p>
-                    <p>Tillåt dubbletter: {settings.allowDuplicateLetters ? "Ja" : "Nej"}</p>
-                </div>
-            )}
-            {gameId && settings && (
-                <>
-                <GuessForm
-                    onSubmitGuess={handleSubmitGuess}
-                    disabled = {gameStatus === "starting" ||
-                                gameStatus === "won" ||
-                                gameStatus === "savingScore" ||
-                                gameStatus === "scoreSaved"}
-                    wordLength={settings.wordLength}
-                />
-                <GuessList guesses={guesses} />
-                </>
-                )}
-                {gameStatus === "won" && !scoreSaved && (
-                    <SaveScoreForm
-                    onSaveScore={handleSaveScore}
-                    disabled={gameStatus === "savingScore"}
+        return (
+            <div className="page-wrapper">
+              <div className="game-card">
+                <header className="page-header">
+                  <h1>Wordle Fullstack</h1>
+                  <p className="subtitle">
+                    Gissa ordet, få feedback och spara ditt resultat i highscore-listan.
+                  </p>
+                </header>
+          
+                <section className="panel">
+                  <h2>Inställningar</h2>
+                  <GameSettings
+                    onStartGame={handleStartGame}
+                    disabled={gameStatus === "starting" || gameStatus === "savingScore"}
+                  />
+                </section>
+          
+                <section className="panel">
+                  <h2>Status</h2>
+                  <p className="status-badge">Status: {gameStatus}</p>
+          
+                  {errorMessage && <p className="error-message">Fel: {errorMessage}</p>}
+          
+                  {gameId && <p><strong>Game ID:</strong> {gameId}</p>}
+          
+                  {settings && (
+                    <div className="settings-summary">
+                      <p><strong>Ordlängd:</strong> {settings.wordLength}</p>
+                      <p>
+                        <strong>Tillåt dubletter:</strong>{" "}
+                        {settings.allowDuplicateLetters ? "Ja" : "Nej"}
+                      </p>
+                    </div>
+                  )}
+                </section>
+          
+                {gameId && settings && (
+                  <section className="panel">
+                    <h2>Spela</h2>
+          
+                    <GuessForm
+                      onSubmitGuess={handleSubmitGuess}
+                      disabled={
+                        gameStatus === "starting" ||
+                        gameStatus === "won" ||
+                        gameStatus === "savingScore" ||
+                        gameStatus === "scoreSaved"
+                      }
+                      wordLength={settings.wordLength}
                     />
+          
+                    <GuessList guesses={guesses} />
+                  </section>
                 )}
+          
+                {gameStatus === "won" && !scoreSaved && (
+                  <section className="panel">
+                    <h2>Du vann!</h2>
+                    <p>Fyll i ditt namn för att spara resultatet.</p>
+          
+                    <SaveScoreForm
+                      onSaveScore={handleSaveScore}
+                      disabled={gameStatus === "savingScore"}
+                    />
+                  </section>
+                )}
+          
                 {scoreSaved && savedHighscore && (
-                    <div>
-                        <h2>Highscore Sparad!</h2>
-                        <p>Namn: {savedHighscore.name}</p>
-                        <p>Antal gissningar: {savedHighscore.guessCount}</p>
-                        <p>Tid (ms): {savedHighscore.durationMs}</p>
-                        </div>
-                        )}
-        </div>
-    );
+                  <section className="panel success-panel">
+                    <h2>Highscore sparad!</h2>
+                    <p><strong>Namn:</strong> {savedHighscore.name}</p>
+                    <p><strong>Antal gissningar:</strong> {savedHighscore.guessCount}</p>
+                    <p><strong>Tid (ms):</strong> {savedHighscore.durationMs}</p>
+                  </section>
+                )}
+              </div>
+            </div>
+          );
 }
 export default GamePage;
