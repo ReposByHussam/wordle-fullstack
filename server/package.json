@@ -1,11 +1,12 @@
 {
-  "name": "server",
+  "name": "wordle-fullstack-server",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
+    "prestart": "cd ../client && npm install && npm run build",
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"inga tester finns ännu\"" 
   },
   "keywords": [],
   "author": "",

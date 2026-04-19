@@ -91,7 +91,7 @@ function GamePage() {
     <div className="page-wrapper">
       <div className="game-card">
         <nav className="top-nav">
-          <a href="http://localhost:5173">Spela</a>
+          <a href="/">Spela</a>
           <a href="http://localhost:5080/about">Om projektet</a>
           <a href="http://localhost:5080/highscores">Highscores</a>
         </nav>

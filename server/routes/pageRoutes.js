@@ -5,9 +5,6 @@ const router = express.Router();
 //Hämta page controller
 const pageController = require("../controllers/pageController");
 
-//startsidan
-router.get("/", pageController.getHomePage);
-
 //informationssida
 router.get("/about", pageController.getAboutPage);
 

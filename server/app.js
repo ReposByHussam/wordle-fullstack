@@ -34,6 +34,13 @@ app.set("views", path.join(__dirname, "./views"));
 //Gör så att express kan läsa JSON data i request body
 app.use(express.json());
 
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
+//serva byggd react app
+app.use(express.static(path.join(__dirname, "../client/dist")));
+
+
 //koppla API routes till appen
 app.use("/api", apiRoutes);
 

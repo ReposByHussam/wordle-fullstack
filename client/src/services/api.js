@@ -1,6 +1,6 @@
 //starta ett nytt spel via backend API:t
 export async function startGame(settings) {
-    const response = await fetch("http://localhost:5080/api/games", {
+    const response = await fetch("/api/games", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -17,7 +17,7 @@ export async function startGame(settings) {
     return data; 
 }
 export async function submitGuess(gameId, guess) {
-    const response = await fetch(`http://localhost:5080/api/games/${gameId}/guesses`, {
+    const response = await fetch(`api/games/${gameId}/guesses`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -34,7 +34,7 @@ export async function submitGuess(gameId, guess) {
     return data; 
 }
 export async function saveHighscore(name, gameId){
-    const response = await fetch(`http://localhost:5080/api/highscores`, {
+    const response = await fetch(`/api/highscores`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
